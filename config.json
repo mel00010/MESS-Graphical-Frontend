@@ -1,0 +1,125 @@
+{
+	"games": [
+		
+		{
+			"name":"Donkey Kong Country",
+			"path":"/home/mel/roms/snes/donkey_kong_country.sfc",
+			"save_path":"/home/mel/roms/states/snes/donkey_kong_country",
+			"system":"snes"
+		},
+		{
+			"name":"Chrono Trigger",
+			"path":"/home/mel/roms/snes/chrono_trigger.sfc",
+			"save_path":"/home/mel/roms/states/snes/chrono_trigger",
+			"system":"snes"
+		},
+		{
+			"name":"Donkey Kong Country 2",
+			"path":"/home/mel/roms/snes/donkey_kong_country_2.smc",
+			"save_path":"/home/mel/roms/states/snes/donkey_kong_country_2",
+			"system":"snes"
+		},
+		{
+			"name":"Earthbound",
+			"path":"/home/mel/roms/snes/earthbound.smc",
+			"save_path":"/home/mel/roms/states/snes/earthbound",
+			"system":"snes"
+		},
+		{
+			"name":"Earthworm Jim",
+			"path":"/home/mel/roms/snes/earthworm_jim.smc",
+			"save_path":"/home/mel/roms/states/snes/earthworm_jim",
+			"system":"snes"
+		},
+		{
+			"name":"Final Fantasy II",
+			"path":"/home/mel/roms/snes/final_fantasy_ii.smc",
+			"save_path":"/home/mel/roms/states/snes/final_fantasy_ii",
+			"system":"snes"
+		},
+		{
+			"name":"Final Fantasy III",
+			"path":"/home/mel/roms/snes/final_fantasy_iii.smc",
+			"save_path":"/home/mel/roms/states/snes/final_fantasy_iii",
+			"system":"snes"
+		},
+		{
+			"name":"Kirby Super Star",
+			"path":"/home/mel/roms/snes/kirby_super_star.sfc",
+			"save_path":"/home/mel/roms/states/snes/kirby_super_star",
+			"system":"snes"
+		},
+		{
+			"name":"The Legend of Zelda - A Link to the Past",
+			"path":"/home/mel/roms/snes/the_legend_of_zelda.smc",
+			"save_path":"/home/mel/roms/states/snes/the_legend_of_zelda",
+			"system":"snes"
+		},
+		{
+			"name":"Mega Man X",
+			"path":"/home/mel/roms/snes/mega_man_x.smc",
+			"save_path":"/home/mel/roms/states/snes/mega_man_x",
+			"system":"snes"
+		},
+		{
+			"name":"Secret of Mana",
+			"path":"/home/mel/roms/snes/secret_of_mana.smc",
+			"save_path":"/home/mel/roms/states/snes/secret_of_mana",
+			"system":"snes"
+		},
+		{
+			"name":"Star Fox",
+			"path":"/home/mel/roms/snes/star_fox.smc",
+			"save_path":"/home/mel/roms/states/snes/star_fox",
+			"system":"snes"
+		},
+		{
+			"name":"Street Fighter II Turbo",
+			"path":"/home/mel/roms/snes/street_fighter_ii_turbo.sfc",
+			"save_path":"/home/mel/roms/states/snes/street_fighter_ii_turbo",
+			"system":"snes"
+		},
+		{
+			"name":"Super Bomberman",
+			"path":"/home/mel/roms/snes/super_bomberman.smc",
+			"save_path":"/home/mel/roms/states/snes/super_bomberman",
+			"system":"snes"
+		},
+		{
+			"name":"Super Castlevania IV",
+			"path":"/home/mel/roms/snes/super_castlevania_iv.smc",
+			"save_path":"/home/mel/roms/states/snes/super_castlevania_iv",
+			"system":"snes"
+		},
+		{
+			"name":"Super Mario All-Stars",
+			"path":"/home/mel/roms/snes/super_mario_all_stars.smc",
+			"save_path":"/home/mel/roms/states/snes/super_mario_all_stars",
+			"system":"snes"
+		},
+		{
+			"name":"Super Mario Kart",
+			"path":"/home/mel/roms/snes/super_mario_kart.sfc",
+			"save_path":"/home/mel/roms/states/snes/super_mario_kart",
+			"system":"snes"
+		},
+		{
+			"name":"Super Mario World",
+			"path":"/home/mel/roms/snes/super_mario_world.smc",
+			"save_path":"/home/mel/roms/states/snes/super_mario_world",
+			"system":"snes"
+		},
+		{
+			"name":"Super Mario World 2 - Yoshi's Island",
+			"path":"/home/mel/roms/snes/super_mario_world_2.smc",
+			"save_path":"/home/mel/roms/states/snes/super_mario_world_2",
+			"system":"snes"
+		},
+		{
+			"name":"Super Metroid",
+			"path":"/home/mel/roms/snes/super_metroid.smc",
+			"save_path":"/home/mel/roms/states/snes/super_metroid",
+			"system":"snes"
+		}
+	]
+}

@@ -1,0 +1,2 @@
+This is a graphical frontend for MESS.  It reads a list of games from a JSON file and displays them in a GUI.  After a user has selected a game, it loads the save states for that game into MESS's save state folder and launches the game.  After it is finished running, it appends a date stamp and copies the new save states back into the folder they came from.  
+e
