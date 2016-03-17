@@ -1,4 +1,4 @@
-AC_INIT([snescpp], [1.0], [bug-automake@gnu.org])
+AC_INIT([mess-graphical-frontend], [1.0], [bug-automake@gnu.org])
 AM_INIT_AUTOMAKE([-Wall -Werror foreign])
 AC_PROG_CXX
 PKG_CHECK_MODULES([MYAPP], [gtkmm-3.0 >= 3.8.0])
