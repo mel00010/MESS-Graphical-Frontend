@@ -20,8 +20,8 @@
 
 SNES::SNES()
 {
-	
 }
+
 std::string SNES::filterFiles(const std::string path, const std::string letter) 
 {
 	std::string regular_expression = "^"+letter;
