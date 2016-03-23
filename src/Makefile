@@ -102,8 +102,7 @@ CONFIG_CLEAN_VPATH_FILES =
 am__installdirs = "$(DESTDIR)$(bindir)" "$(DESTDIR)$(includedir)"
 PROGRAMS = $(bin_PROGRAMS)
 am_snes_OBJECTS = snes-main.$(OBJEXT) snes-SNES.$(OBJEXT) \
-	snes-jsoncpp.$(OBJEXT) snes-gui.$(OBJEXT) \
-	snes-treeview.$(OBJEXT) snes-cli.$(OBJEXT) \
+	snes-jsoncpp.$(OBJEXT) snes-gui.$(OBJEXT) snes-cli.$(OBJEXT) \
 	snes-parser.$(OBJEXT)
 snes_OBJECTS = $(am_snes_OBJECTS)
 snes_DEPENDENCIES =
@@ -288,8 +287,8 @@ target_alias =
 top_build_prefix = ../
 top_builddir = ..
 top_srcdir = ..
-snes_SOURCES = main.cpp SNES.cpp jsoncpp.cpp gui.cpp treeview.cpp cli.cpp parser.cpp
-include_HEADERS = SNES.h gui.h treeview.h cli.h parser.h
+snes_SOURCES = main.cpp SNES.cpp jsoncpp.cpp gui.cpp cli.cpp parser.cpp
+include_HEADERS = SNES.h gui.h cli.h parser.h
 snes_LDADD = -lboost_regex -lboost_system -lboost_filesystem -lpthread -lgtkmm-3.0 -latkmm-1.6 -lgdkmm-3.0 -lgiomm-2.4 -lpangomm-1.4 -lglibmm-2.4 -lgtk-3 -lgdk-3 -lpangocairo-1.0 -lpango-1.0 -latk-1.0 -lcairo-gobject -lgio-2.0 -lcairomm-1.0 -lcairo -lsigc-2.0 -lgdk_pixbuf-2.0 -lgobject-2.0 -lglib-2.0
 snes_CXXFLAGS = -Wall -g -std=gnu++11 -I /usr/local/include \
 	-I/usr/include/gtkmm-3.0 \
@@ -411,7 +410,6 @@ include ./$(DEPDIR)/snes-gui.Po
 include ./$(DEPDIR)/snes-jsoncpp.Po
 include ./$(DEPDIR)/snes-main.Po
 include ./$(DEPDIR)/snes-parser.Po
-include ./$(DEPDIR)/snes-treeview.Po
 
 .cpp.o:
 	$(AM_V_CXX)$(CXXCOMPILE) -MT $@ -MD -MP -MF $(DEPDIR)/$*.Tpo -c -o $@ $<
@@ -482,20 +480,6 @@ snes-gui.obj: gui.cpp
 #	$(AM_V_CXX)source='gui.cpp' object='snes-gui.obj' libtool=no \
 #	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
 #	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(snes_CXXFLAGS) $(CXXFLAGS) -c -o snes-gui.obj `if test -f 'gui.cpp'; then $(CYGPATH_W) 'gui.cpp'; else $(CYGPATH_W) '$(srcdir)/gui.cpp'; fi`
-
-snes-treeview.o: treeview.cpp
-	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(snes_CXXFLAGS) $(CXXFLAGS) -MT snes-treeview.o -MD -MP -MF $(DEPDIR)/snes-treeview.Tpo -c -o snes-treeview.o `test -f 'treeview.cpp' || echo '$(srcdir)/'`treeview.cpp
-	$(AM_V_at)$(am__mv) $(DEPDIR)/snes-treeview.Tpo $(DEPDIR)/snes-treeview.Po
-#	$(AM_V_CXX)source='treeview.cpp' object='snes-treeview.o' libtool=no \
-#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
-#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(snes_CXXFLAGS) $(CXXFLAGS) -c -o snes-treeview.o `test -f 'treeview.cpp' || echo '$(srcdir)/'`treeview.cpp
-
-snes-treeview.obj: treeview.cpp
-	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(snes_CXXFLAGS) $(CXXFLAGS) -MT snes-treeview.obj -MD -MP -MF $(DEPDIR)/snes-treeview.Tpo -c -o snes-treeview.obj `if test -f 'treeview.cpp'; then $(CYGPATH_W) 'treeview.cpp'; else $(CYGPATH_W) '$(srcdir)/treeview.cpp'; fi`
-	$(AM_V_at)$(am__mv) $(DEPDIR)/snes-treeview.Tpo $(DEPDIR)/snes-treeview.Po
-#	$(AM_V_CXX)source='treeview.cpp' object='snes-treeview.obj' libtool=no \
-#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
-#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(snes_CXXFLAGS) $(CXXFLAGS) -c -o snes-treeview.obj `if test -f 'treeview.cpp'; then $(CYGPATH_W) 'treeview.cpp'; else $(CYGPATH_W) '$(srcdir)/treeview.cpp'; fi`
 
 snes-cli.o: cli.cpp
 	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(snes_CXXFLAGS) $(CXXFLAGS) -MT snes-cli.o -MD -MP -MF $(DEPDIR)/snes-cli.Tpo -c -o snes-cli.o `test -f 'cli.cpp' || echo '$(srcdir)/'`cli.cpp

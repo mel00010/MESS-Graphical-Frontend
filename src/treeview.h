@@ -12,6 +12,7 @@ class TreeView : public Gtk::TreeView
 public:
 	TreeView(Json::Value root);
 	virtual ~TreeView();
+	void select_game();
 
 protected:
 	// Override Signal handler:
@@ -19,7 +20,6 @@ protected:
 	bool on_button_press_event(GdkEventButton* button_event) override;
 	bool on_key_release_event(GdkEventKey* event) override;
 	Json::Value root;
-	std::string getFileContents(const char *filename);
 	//~ std::string 
 	//Tree model columns:
 	class ModelColumns : public Gtk::TreeModel::ColumnRecord
