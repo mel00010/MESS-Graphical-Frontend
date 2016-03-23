@@ -1,10 +1,13 @@
 #include <iostream>
+#include <string>
 #include "gui.h"
 
-Gui::Gui()
+
+Gui::Gui(std::string configFile)
 : m_VBox(Gtk::ORIENTATION_VERTICAL),
 	m_Button_Quit("Quit")
 {
+	TreeView *m_TreeView = new TreeView(configFile);
 	set_title("Game Selection");
 	set_border_width(5);
 	set_default_size(815, 600);
@@ -12,7 +15,7 @@ Gui::Gui()
 	add(m_VBox);
 
 	//Add the TreeView, inside a ScrolledWindow, with the button underneath:
-	m_ScrolledWindow.add(m_TreeView);
+	m_ScrolledWindow.add(*m_TreeView);
 
 	//Only show the scrollbars when they are necessary:
 	m_ScrolledWindow.set_policy(Gtk::POLICY_AUTOMATIC, Gtk::POLICY_AUTOMATIC);

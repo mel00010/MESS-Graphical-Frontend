@@ -1,3 +1,5 @@
+#ifndef CLI_H
+#define CLI_H
 #include "SNES.h"
 #include <stdlib.h>
 #include <string>
@@ -15,3 +17,4 @@ class Cli
 		void set_keypress(void);
 		std::string getFileContents(const char *filename);
 };
+#endif //CLI_H

@@ -7,7 +7,7 @@
 class Gui : public Gtk::Window
 {
 public:
-	Gui();
+	Gui(std::string configFile);
 	virtual ~Gui();
 
 protected:
@@ -20,8 +20,6 @@ protected:
 	Gtk::Box m_VBox;
 
 	Gtk::ScrolledWindow m_ScrolledWindow;
-	TreeView m_TreeView;
-
 	Gtk::ButtonBox m_ButtonBox;
 	Gtk::Button m_Button_Quit;
 };

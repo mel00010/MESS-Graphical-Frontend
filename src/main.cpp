@@ -9,14 +9,22 @@
 
 
 
-void help(std::string filename, std::string command = "", bool error = false) {
-	std::cout<<"Usage: "<< filename << std::endl;
+void help(std::string filename, std::string command = "", bool error = false)
+{
+	std::cout<<"Usage: \t" << filename << "[--gui|-g][--file|-f configFile]"<< std::endl;
+	//~ std::cout<< "\t" << filename << "[--gui|-g][--file|-f configFile]" << std::endl;
+	std::cout<< "\t" << filename << "[--cli|-c][--file|-f filename]" << std::endl;
+	std::cout<< "Options:\
+	\n\t-g, --gui\tForces the the program to use a CUI\
+	\n\t-c, --cli\tForces the program to use a CLI\n\t-f       \t Specifies a config file to use for the game list\
+	\n\t    --file\t Same as -f" << std::endl;
 	if ( command != "" && error == true) {
 		std::cout<< "Argument " << command << " not valid "<< std::endl;
 		exit(1);
-	} else if (command != "" && error == false) {
-		std::cout<< command << std::endl;
-		exit(0);
+	//~ } else if (command != "" && error == false) {
+		//~ std::cout << 
+		//~ std::cout<< command << std::endl;
+		//~ exit(0);
 	}
 }
 int main(int argc, char* argv[])
@@ -25,27 +33,31 @@ int main(int argc, char* argv[])
 	if ( argc == 1 ) 
 	{
 		auto app = Gtk::Application::create("gameSelection.window");
-		Gui window;
+		Gui window(std::string("/home/mel/roms/config.json"));
 		app->run(window);
 			
 	} else {
 		// Loop through arguments
 		for (int i = 1; i < argc + 1; i++){
 			std::string arg(argv[i]);
-			if ((std::string(argv[i]).compare("--cli") == 0) || (std::string(argv[i]).compare("-c") == 0))  
+			if ((std::string(argv[i]).compare("--gui") == 0) || (std::string(argv[i]).compare("-g") == 0))  
 			{
 				if (argc > i+1) {
 					if (((std::string(argv[i+1]).compare("--file") == 0) || (std::string(argv[i+1]).compare("-f") == 0)) && (argc > i+2))
 					{
-						Cli cli(argv[i+2]);
+						auto app = Gtk::Application::create("gameSelection.window");
+						Gui window(argv[i+2]);
+							app->run(window);
 						i = i+2;
-					} else {
-						std::cout << "No argument found after -f:  Ignoring" << std::endl;
+					} else if ((std::string(argv[i+1]).compare("--file") == 0) || (std::string(argv[i+1]).compare("-f") == 0)) {
+						std::cout << "Error no file specified after " << argv[i+1] << std::endl;
 						//~ Cli cli("/home/mel/roms/config.json");
 						return 1;
 					}
 				} else {
-					Cli cli("/home/mel/roms/config.json");
+					auto app = Gtk::Application::create("gameSelection.window");
+					Gui window("/home/mel/roms/config.json");
+						app->run(window);
 				}
 			} else if ((std::string(argv[i]).compare("--help")== 0) || (std::string(argv[i]).compare("-h")== 0)) {
 				if (argc > i+1) {
@@ -54,10 +66,32 @@ int main(int argc, char* argv[])
 					help(argv[0]);
 				}
 				return 0;			
-			} else if ((std::string(argv[i]).compare("--gui")== 0) || (std::string(argv[i]).compare("-g")== 0)) {
-				auto app = Gtk::Application::create("gameSelection.window");
-				Gui window;
-					return app->run(window);
+			} else if ((std::string(argv[i]).compare("--cli") == 0) || (std::string(argv[i]).compare("-c") == 0))  
+			{
+				if (argc > i+1) {
+					if (((std::string(argv[i+1]).compare("--file") == 0) || (std::string(argv[i+1]).compare("-f") == 0)) && (argc > i+2))
+					{
+						Cli cli(argv[i+2]);
+						i = i+2;
+					} else {
+						std::cout << "Error no file specified after -f" << std::endl;
+						//~ Cli cli("/home/mel/roms/config.json");
+						return 1;
+					}
+				} else {
+					Cli cli("/home/mel/roms/config.json");
+				}
+			} else if ((std::string(argv[i]).compare("--file") == 0) || (std::string(argv[i]).compare("-f") == 0)) {
+				if (argc > i+1) {
+						auto app = Gtk::Application::create("gameSelection.window");
+						Gui window(std::string(argv[i+1]));
+						i++;
+							return app->run(window);	
+				} else {
+						std::cout << "Error no file specified after " << argv[i] << std::endl;
+						//~ Cli cli("/home/mel/roms/config.json");
+						return 1;
+				}
 			} else {
 				help(argv[0], argv[i], true);
 			}	

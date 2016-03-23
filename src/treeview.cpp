@@ -5,19 +5,26 @@
 #include <fstream>
 #include <stdlib.h>
 
-TreeView::TreeView()
+TreeView::TreeView(std::string configFile)
 {
+	try 
+	{
+		reader.parse(getFileContents(configFile.c_str()),root);	
+	}
+	catch (std::bad_alloc& e) 
+	{
+		std::cout << "\033[1mError reading file " << configFile << "\033[0m"<< std::endl;
+		exit(1);
+	}	
 	//Create the Tree model:
 	m_refTreeModel = Gtk::ListStore::create(m_Columns);
 	set_model(m_refTreeModel);
 
 	//Fill the TreeView's model
-	reader.parse(getFileContents("/home/mel/roms/config.json"),root);
-	Json::Value games_ = root["games"];
 	
 	int i = 1;
 	Gtk::TreeModel::Row row;
-	for (Json::Value::iterator itr = games_.begin(); itr != games_.end(); itr++)
+	for (Json::Value::iterator itr = root["games"].begin(); itr != root["games"].end(); itr++)
 	{
 		Json::Value game = (*itr);
 		row = *(m_refTreeModel->append());
@@ -98,16 +105,19 @@ bool TreeView::on_key_release_event(GdkEventKey* event)
 }
 std::string TreeView::getFileContents(const char *filename)
 {
-  std::ifstream in(filename, std::ios::in | std::ios::binary);
-  if (in)
-  {
-    std::string contents;
-    in.seekg(0, std::ios::end);
-    contents.resize(in.tellg());
-    in.seekg(0, std::ios::beg);
-    in.read(&contents[0], contents.size());
-    in.close();
-    return(contents);
-  }
-  throw(errno);
+	std::ifstream in(filename, std::ios::in | std::ios::binary);	
+	if (in)
+	{
+		std::string contents;
+		in.seekg(0, std::ios::end);
+		contents.resize(in.tellg());
+		in.seekg(0, std::ios::beg);
+		in.read(&contents[0], contents.size());
+		in.close();
+		return(contents);
+	} else {
+		std::cout << "\033[1mError File " << filename << " not found\033[0m" << std::endl;
+		exit(1);
+	}
+	//~ throw(errno);
 }

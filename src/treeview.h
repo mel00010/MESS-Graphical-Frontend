@@ -10,7 +10,7 @@
 class TreeView : public Gtk::TreeView
 {
 public:
-	TreeView();
+	TreeView(std::string configFile);
 	virtual ~TreeView();
 
 protected:
@@ -22,9 +22,8 @@ protected:
 	std::string getFileContents(const char *filename);
 	Json::Value root;
 	Json::Reader reader;
-
 	SNES snes;
-	
+	//~ std::string 
 	//Tree model columns:
 	class ModelColumns : public Gtk::TreeModel::ColumnRecord
 	{
