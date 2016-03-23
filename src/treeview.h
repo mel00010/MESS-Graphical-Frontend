@@ -10,7 +10,7 @@
 class TreeView : public Gtk::TreeView
 {
 public:
-	TreeView(std::string configFile);
+	TreeView(Json::Value root);
 	virtual ~TreeView();
 
 protected:
@@ -18,11 +18,8 @@ protected:
 	// Alternatively, use signal_button_press_event().connect_notify()
 	bool on_button_press_event(GdkEventButton* button_event) override;
 	bool on_key_release_event(GdkEventKey* event) override;
-
-	std::string getFileContents(const char *filename);
 	Json::Value root;
-	Json::Reader reader;
-	SNES snes;
+	std::string getFileContents(const char *filename);
 	//~ std::string 
 	//Tree model columns:
 	class ModelColumns : public Gtk::TreeModel::ColumnRecord

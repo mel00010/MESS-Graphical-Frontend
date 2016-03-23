@@ -10,24 +10,7 @@
 #include <termio.h>
 #include <curses.h>
 
-std::string Cli::getFileContents(const char *filename)
-{
-	std::ifstream in(filename, std::ios::in | std::ios::binary);	
-	if (in)
-	{
-		std::string contents;
-		in.seekg(0, std::ios::end);
-		contents.resize(in.tellg());
-		in.seekg(0, std::ios::beg);
-		in.read(&contents[0], contents.size());
-		in.close();
-		return(contents);
-	} else {
-		std::cout << "\033[1mError File " << filename << " not found\033[0m" << std::endl;
-		exit(1);
-	}
-	//~ throw(errno);
-}
+
 void Cli::set_keypress(void)
 {
 	struct termios new_settings, stored_settings;
@@ -45,17 +28,8 @@ void Cli::set_keypress(void)
 	tcsetattr(0,TCSANOW,&new_settings);
 }
 
-Cli::Cli (std::string configFile) 
+Cli::Cli(Json::Value root) 
 {
-	try 
-	{
-		reader.parse(getFileContents(configFile.c_str()),root);	
-	}
-	catch (std::bad_alloc& e) 
-	{
-		std::cout << "\033[1mError reading file " << configFile << "\033[0m"<< std::endl;
-		exit(1);
-	}
 	//Generate menu
 	std::cout << "\033[1;31mGAME SELECTION \033[0m" << std::endl << std::endl;
 	//~ Json::Value games_ = root["games"];
@@ -101,9 +75,7 @@ Cli::Cli (std::string configFile)
 			}
 			if (root["games"].isValidIndex(responseInt - 1) && responseInt != 0) { // Load and run game
 				int index = responseInt -1; //People count from 1, the Json array counts from 0
-				snes.load(root["games"][index]["save_path"].asString(),root["games"][index]["system"].asString());
-				snes.run(root["games"][index]["path"].asString(), root["games"][index]["system"].asString());
-				snes.save(root["games"][index]["save_path"].asString(), root["games"][index]["system"].asString());
+				SNES snes(root, index);
 				//~ return 0;
 				exit(0);
 			} else if (responseInt != 0) { // If we get this far, the code must be invalid

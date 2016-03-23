@@ -149,6 +149,7 @@ on mel-debian
 config.status:854: creating Makefile
 config.status:854: creating src/Makefile
 config.status:854: creating config.h
+config.status:1035: config.h is unchanged
 config.status:1083: executing depfiles commands
 
 ## ---------------- ##

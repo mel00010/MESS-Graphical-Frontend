@@ -1,4 +1,5 @@
 #include "SNES.h"
+#include <json/json.h>
 #include <sys/stat.h>
 #include <unistd.h> 
 #include <sys/types.h>
@@ -18,8 +19,11 @@
 
 
 
-SNES::SNES()
+SNES::SNES(Json::Value root, int index)
 {
+	load(root["games"][index]["save_path"].asString(),root["games"][index]["system"].asString());
+	run(root["games"][index]["path"].asString(), root["games"][index]["system"].asString());
+	save(root["games"][index]["save_path"].asString(), root["games"][index]["system"].asString());
 }
 
 std::string SNES::filterFiles(const std::string path, const std::string letter) 

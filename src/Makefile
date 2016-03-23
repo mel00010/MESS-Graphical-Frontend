@@ -103,7 +103,8 @@ am__installdirs = "$(DESTDIR)$(bindir)" "$(DESTDIR)$(includedir)"
 PROGRAMS = $(bin_PROGRAMS)
 am_snes_OBJECTS = snes-main.$(OBJEXT) snes-SNES.$(OBJEXT) \
 	snes-jsoncpp.$(OBJEXT) snes-gui.$(OBJEXT) \
-	snes-treeview.$(OBJEXT) snes-cli.$(OBJEXT)
+	snes-treeview.$(OBJEXT) snes-cli.$(OBJEXT) \
+	snes-parser.$(OBJEXT)
 snes_OBJECTS = $(am_snes_OBJECTS)
 snes_DEPENDENCIES =
 snes_LINK = $(CXXLD) $(snes_CXXFLAGS) $(CXXFLAGS) $(AM_LDFLAGS) \
@@ -287,8 +288,8 @@ target_alias =
 top_build_prefix = ../
 top_builddir = ..
 top_srcdir = ..
-snes_SOURCES = main.cpp SNES.cpp jsoncpp.cpp gui.cpp treeview.cpp cli.cpp
-include_HEADERS = SNES.h gui.h treeview.h cli.h
+snes_SOURCES = main.cpp SNES.cpp jsoncpp.cpp gui.cpp treeview.cpp cli.cpp parser.cpp
+include_HEADERS = SNES.h gui.h treeview.h cli.h parser.h
 snes_LDADD = -lboost_regex -lboost_system -lboost_filesystem -lpthread -lgtkmm-3.0 -latkmm-1.6 -lgdkmm-3.0 -lgiomm-2.4 -lpangomm-1.4 -lglibmm-2.4 -lgtk-3 -lgdk-3 -lpangocairo-1.0 -lpango-1.0 -latk-1.0 -lcairo-gobject -lgio-2.0 -lcairomm-1.0 -lcairo -lsigc-2.0 -lgdk_pixbuf-2.0 -lgobject-2.0 -lglib-2.0
 snes_CXXFLAGS = -Wall -g -std=gnu++11 -I /usr/local/include \
 	-I/usr/include/gtkmm-3.0 \
@@ -409,6 +410,7 @@ include ./$(DEPDIR)/snes-cli.Po
 include ./$(DEPDIR)/snes-gui.Po
 include ./$(DEPDIR)/snes-jsoncpp.Po
 include ./$(DEPDIR)/snes-main.Po
+include ./$(DEPDIR)/snes-parser.Po
 include ./$(DEPDIR)/snes-treeview.Po
 
 .cpp.o:
@@ -508,6 +510,20 @@ snes-cli.obj: cli.cpp
 #	$(AM_V_CXX)source='cli.cpp' object='snes-cli.obj' libtool=no \
 #	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
 #	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(snes_CXXFLAGS) $(CXXFLAGS) -c -o snes-cli.obj `if test -f 'cli.cpp'; then $(CYGPATH_W) 'cli.cpp'; else $(CYGPATH_W) '$(srcdir)/cli.cpp'; fi`
+
+snes-parser.o: parser.cpp
+	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(snes_CXXFLAGS) $(CXXFLAGS) -MT snes-parser.o -MD -MP -MF $(DEPDIR)/snes-parser.Tpo -c -o snes-parser.o `test -f 'parser.cpp' || echo '$(srcdir)/'`parser.cpp
+	$(AM_V_at)$(am__mv) $(DEPDIR)/snes-parser.Tpo $(DEPDIR)/snes-parser.Po
+#	$(AM_V_CXX)source='parser.cpp' object='snes-parser.o' libtool=no \
+#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
+#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(snes_CXXFLAGS) $(CXXFLAGS) -c -o snes-parser.o `test -f 'parser.cpp' || echo '$(srcdir)/'`parser.cpp
+
+snes-parser.obj: parser.cpp
+	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(snes_CXXFLAGS) $(CXXFLAGS) -MT snes-parser.obj -MD -MP -MF $(DEPDIR)/snes-parser.Tpo -c -o snes-parser.obj `if test -f 'parser.cpp'; then $(CYGPATH_W) 'parser.cpp'; else $(CYGPATH_W) '$(srcdir)/parser.cpp'; fi`
+	$(AM_V_at)$(am__mv) $(DEPDIR)/snes-parser.Tpo $(DEPDIR)/snes-parser.Po
+#	$(AM_V_CXX)source='parser.cpp' object='snes-parser.obj' libtool=no \
+#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
+#	$(AM_V_CXX_no)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(snes_CXXFLAGS) $(CXXFLAGS) -c -o snes-parser.obj `if test -f 'parser.cpp'; then $(CYGPATH_W) 'parser.cpp'; else $(CYGPATH_W) '$(srcdir)/parser.cpp'; fi`
 install-includeHEADERS: $(include_HEADERS)
 	@$(NORMAL_INSTALL)
 	@list='$(include_HEADERS)'; test -n "$(includedir)" || list=; \

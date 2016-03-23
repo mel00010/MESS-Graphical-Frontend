@@ -3,11 +3,11 @@
 #include "gui.h"
 
 
-Gui::Gui(std::string configFile)
+Gui::Gui(Json::Value root)
 : m_VBox(Gtk::ORIENTATION_VERTICAL),
 	m_Button_Quit("Quit")
 {
-	TreeView *m_TreeView = new TreeView(configFile);
+	TreeView *m_TreeView = new TreeView(root);
 	set_title("Game Selection");
 	set_border_width(5);
 	set_default_size(815, 600);

@@ -7,15 +7,12 @@
 class Gui : public Gtk::Window
 {
 public:
-	Gui(std::string configFile);
+	Gui(Json::Value root);
 	virtual ~Gui();
 
 protected:
 	//Signal handlers:
 	void on_button_quit();
-	
- 
-
 	//Child widgets:
 	Gtk::Box m_VBox;
 

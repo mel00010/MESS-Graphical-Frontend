@@ -1,6 +1,8 @@
 #include <gtkmm.h>
 #include "gui.h"
 #include "cli.h"
+#include "parser.h"
+#include <json/json.h>
 //~ #include <gtkmm/application.h>
 #include <iostream>
 #include <string>
@@ -32,8 +34,10 @@ int main(int argc, char* argv[])
 	// Check if argument
 	if ( argc == 1 ) 
 	{
+		Parser parser;
+		Json::Value root = parser.parse(std::string("/home/mel/roms/config.json"));
 		auto app = Gtk::Application::create("gameSelection.window");
-		Gui window(std::string("/home/mel/roms/config.json"));
+		Gui window(root);
 		app->run(window);
 			
 	} else {
@@ -45,8 +49,10 @@ int main(int argc, char* argv[])
 				if (argc > i+1) {
 					if (((std::string(argv[i+1]).compare("--file") == 0) || (std::string(argv[i+1]).compare("-f") == 0)) && (argc > i+2))
 					{
+						Parser parser;
+						Json::Value root = parser.parse(argv[i+2]);
 						auto app = Gtk::Application::create("gameSelection.window");
-						Gui window(argv[i+2]);
+						Gui window(root);
 							app->run(window);
 						i = i+2;
 					} else if ((std::string(argv[i+1]).compare("--file") == 0) || (std::string(argv[i+1]).compare("-f") == 0)) {
@@ -55,8 +61,10 @@ int main(int argc, char* argv[])
 						return 1;
 					}
 				} else {
+					Parser parser;
+					Json::Value root = parser.parse(std::string("/home/mel/roms/config.json"));
 					auto app = Gtk::Application::create("gameSelection.window");
-					Gui window("/home/mel/roms/config.json");
+					Gui window(root);
 						app->run(window);
 				}
 			} else if ((std::string(argv[i]).compare("--help")== 0) || (std::string(argv[i]).compare("-h")== 0)) {
@@ -71,7 +79,9 @@ int main(int argc, char* argv[])
 				if (argc > i+1) {
 					if (((std::string(argv[i+1]).compare("--file") == 0) || (std::string(argv[i+1]).compare("-f") == 0)) && (argc > i+2))
 					{
-						Cli cli(argv[i+2]);
+						Parser parser;
+						Json::Value root = parser.parse(argv[i+2]);
+						Cli cli(root);
 						i = i+2;
 					} else {
 						std::cout << "Error no file specified after -f" << std::endl;
@@ -79,18 +89,21 @@ int main(int argc, char* argv[])
 						return 1;
 					}
 				} else {
-					Cli cli("/home/mel/roms/config.json");
+					Parser parser;
+					Json::Value root = parser.parse(std::string("/home/mel/roms/config.json"));
+					Cli cli(root);
 				}
 			} else if ((std::string(argv[i]).compare("--file") == 0) || (std::string(argv[i]).compare("-f") == 0)) {
 				if (argc > i+1) {
-						auto app = Gtk::Application::create("gameSelection.window");
-						Gui window(std::string(argv[i+1]));
-						i++;
-							return app->run(window);	
+					Parser parser;
+					Json::Value root = parser.parse(argv[i+1]);
+					auto app = Gtk::Application::create("gameSelection.window");
+					Gui window(root);
+					i++;
+					return app->run(window);	
 				} else {
-						std::cout << "Error no file specified after " << argv[i] << std::endl;
-						//~ Cli cli("/home/mel/roms/config.json");
-						return 1;
+					std::cout << "Error no file specified after " << argv[i] << std::endl;
+					return 1;
 				}
 			} else {
 				help(argv[0], argv[i], true);

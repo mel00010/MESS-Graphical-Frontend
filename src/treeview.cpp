@@ -5,17 +5,9 @@
 #include <fstream>
 #include <stdlib.h>
 
-TreeView::TreeView(std::string configFile)
+TreeView::TreeView(Json::Value json)
 {
-	try 
-	{
-		reader.parse(getFileContents(configFile.c_str()),root);	
-	}
-	catch (std::bad_alloc& e) 
-	{
-		std::cout << "\033[1mError reading file " << configFile << "\033[0m"<< std::endl;
-		exit(1);
-	}	
+	root = json;
 	//Create the Tree model:
 	m_refTreeModel = Gtk::ListStore::create(m_Columns);
 	set_model(m_refTreeModel);
@@ -40,11 +32,6 @@ TreeView::TreeView(std::string configFile)
 	//~ m_refTreeModel[m_Columns.m_col_system].set_fixed_width(50);
 
 }
-
-TreeView::~TreeView()
-{
-}
-
 bool TreeView::on_button_press_event(GdkEventButton* button_event)
 {
 	bool return_value = false;
@@ -63,9 +50,8 @@ bool TreeView::on_button_press_event(GdkEventButton* button_event)
 			if(iter)
 			{
 				int id = (*iter)[m_Columns.m_col_id] -1;
-				snes.load(root["games"][id]["save_path"].asString(),root["games"][id]["system"].asString());
-				snes.run(root["games"][id]["path"].asString(), root["games"][id]["system"].asString());
-				snes.save(root["games"][id]["save_path"].asString(), root["games"][id]["system"].asString());
+				SNES snes(root, id);
+				
 				//~ std::cout << id << std::endl;
 			}
 		}
@@ -90,9 +76,7 @@ bool TreeView::on_key_release_event(GdkEventKey* event)
 			if(iter)
 			{
 				int id = (*iter)[m_Columns.m_col_id] -1;
-				snes.load(root["games"][id]["save_path"].asString(),root["games"][id]["system"].asString());
-				snes.run(root["games"][id]["path"].asString(), root["games"][id]["system"].asString());
-				snes.save(root["games"][id]["save_path"].asString(), root["games"][id]["system"].asString());
+				SNES snes(root, id);
 				//~ std::cout << id << std::endl;
 			}
 		}
@@ -120,4 +104,7 @@ std::string TreeView::getFileContents(const char *filename)
 		exit(1);
 	}
 	//~ throw(errno);
+}
+TreeView::~TreeView()
+{
 }
