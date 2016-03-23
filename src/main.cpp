@@ -7,6 +7,9 @@
 #include <iostream>
 #include <string>
 #include <stdlib.h>
+#include <unistd.h>
+#include <sys/types.h>
+#include <pwd.h>
 
 
 
@@ -31,11 +34,12 @@ void help(std::string filename, std::string command = "", bool error = false)
 }
 int main(int argc, char* argv[])
 {
+	std::string homedir(getpwuid(getuid())->pw_dir);
 	// Check if argument
 	if ( argc == 1 ) 
 	{
 		Parser parser;
-		Json::Value root = parser.parse(std::string("/home/mel/roms/config.json"));
+		Json::Value root = parser.parse(homedir+std::string("/roms/config.json"));
 		auto app = Gtk::Application::create("gameSelection.window");
 		Gui window(root);
 		app->run(window);
@@ -57,12 +61,11 @@ int main(int argc, char* argv[])
 						i = i+2;
 					} else if ((std::string(argv[i+1]).compare("--file") == 0) || (std::string(argv[i+1]).compare("-f") == 0)) {
 						std::cout << "Error no file specified after " << argv[i+1] << std::endl;
-						//~ Cli cli("/home/mel/roms/config.json");
 						return 1;
 					}
 				} else {
 					Parser parser;
-					Json::Value root = parser.parse(std::string("/home/mel/roms/config.json"));
+					Json::Value root = parser.parse(std::string("/roms/config.json"));
 					auto app = Gtk::Application::create("gameSelection.window");
 					Gui window(root);
 						app->run(window);
@@ -85,12 +88,11 @@ int main(int argc, char* argv[])
 						i = i+2;
 					} else {
 						std::cout << "Error no file specified after -f" << std::endl;
-						//~ Cli cli("/home/mel/roms/config.json");
 						return 1;
 					}
 				} else {
 					Parser parser;
-					Json::Value root = parser.parse(std::string("/home/mel/roms/config.json"));
+					Json::Value root = parser.parse(std::string("/roms/config.json"));
 					Cli cli(root);
 				}
 			} else if ((std::string(argv[i]).compare("--file") == 0) || (std::string(argv[i]).compare("-f") == 0)) {

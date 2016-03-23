@@ -1336,7 +1336,7 @@ snes-main.o: main.cpp /usr/include/stdc-predef.h \
  /usr/include/gtkmm-3.0/gtkmm/uimanager.h \
  /usr/include/gtkmm-3.0/gtkmm/viewport.h \
  /usr/include/gtkmm-3.0/gtkmm/volumebutton.h gui.h json/json.h cli.h \
- parser.h /usr/include/c++/5/iostream
+ parser.h /usr/include/c++/5/iostream /usr/include/pwd.h
 
 /usr/include/stdc-predef.h:
 
@@ -4245,3 +4245,5 @@ cli.h:
 parser.h:
 
 /usr/include/c++/5/iostream:
+
+/usr/include/pwd.h:
